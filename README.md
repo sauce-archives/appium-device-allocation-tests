@@ -3,9 +3,17 @@ This Maven Junit project is for testing device allocation on TestObject platform
 
 ######
 
-## Adding new tests
+### Adding new tests
 All Test classes should start with the word `Test`.
 
+### Environment Variables
+* `TESTOBJECT_API_KEY`
+* `DEVICE_DESCRIPTOR_ID`
+* `TESTOBJECT_POOL_ID`
+* `DEVICE_NAME`
+* `DEVICE_PLATFORM_VERSION`
+* `PRIVATE_DEVICES_ONLY` Boolean
+* `APPIUM_SERVER`
 
-## Run
-Try to run this project in two separate jenkins tasks (Android, IOS) and use `-Dtest=android/* clean test` maven command to run android tests and use `-Dtest=ios/* clean test` to run iOS ones. .
+### Run
+Try to run this project in two separate jenkins tasks (Android, IOS) and use `-Dtest=android/* clean test` maven command for Android and `-Dtest=ios/* clean test` for iOS.
