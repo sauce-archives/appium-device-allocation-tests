@@ -1,4 +1,4 @@
-package android;
+package org.testobject.appium.allocationtests.android;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -10,7 +10,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class TestPrivateDeviceAllocation {
+public class TestAllocationByDeviceName {
 
 	AppiumDriver driver;
 
@@ -19,7 +19,7 @@ public class TestPrivateDeviceAllocation {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 
 		capabilities.setCapability("testobject_api_key", System.getenv("TESTOBJECT_API_KEY"));
-		capabilities.setCapability("privateDevicesOnly", true);
+		capabilities.setCapability("deviceName", System.getenv("DEVICE_NAME"));
 
 		driver = new AndroidDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
 

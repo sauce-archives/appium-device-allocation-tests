@@ -1,7 +1,7 @@
-package android;
+package org.testobject.appium.allocationtests.ios;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,8 +21,9 @@ public class TestAllocationByDeviceNameAndPlatformVersion {
 		capabilities.setCapability("testobject_api_key", System.getenv("TESTOBJECT_API_KEY"));
 		capabilities.setCapability("deviceName", System.getenv("DEVICE_NAME"));
 		capabilities.setCapability("platformVersion", System.getenv("DEVICE_PLATFORM_VERSION"));
+		capabilities.setCapability("automationName", "XCUITest");
 
-		driver = new AndroidDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
+		driver = new IOSDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
 
 		System.out.println(capabilities.toString());
 		System.out.println(driver.getCapabilities().getCapability("testobject_test_report_url"));

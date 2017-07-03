@@ -1,4 +1,4 @@
-package ios;
+package org.testobject.appium.allocationtests.ios;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSDriver;
