@@ -1,3 +1,5 @@
+package ios;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.junit.After;
@@ -8,7 +10,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class TestIOSAllocateByDeviceName {
+public class TestAllocationByDeviceName {
 
 	AppiumDriver driver;
 

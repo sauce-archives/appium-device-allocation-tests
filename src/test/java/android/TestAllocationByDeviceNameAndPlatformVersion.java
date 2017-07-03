@@ -1,3 +1,5 @@
+package android;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.junit.After;
@@ -8,7 +10,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class TestAndroidAllocateByDeviceDescriptorId {
+public class TestAllocationByDeviceNameAndPlatformVersion {
 
 	AppiumDriver driver;
 
@@ -17,7 +19,8 @@ public class TestAndroidAllocateByDeviceDescriptorId {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 
 		capabilities.setCapability("testobject_api_key", System.getenv("TESTOBJECT_API_KEY"));
-		capabilities.setCapability("testobject_device", System.getenv("DEVICE_DESCRIPTOR_ID"));
+		capabilities.setCapability("deviceName", System.getenv("DEVICE_NAME"));
+		capabilities.setCapability("platformVersion", System.getenv("DEVICE_PLATFORM_VERSION"));
 
 		driver = new AndroidDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
 	}
