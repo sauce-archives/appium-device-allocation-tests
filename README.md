@@ -12,7 +12,6 @@ All Test classes should start with the word `Test`.
 * `TESTOBJECT_POOL_ID`
 * `DEVICE_NAME`
 * `DEVICE_PLATFORM_VERSION`
-* `PRIVATE_DEVICES_ONLY` Boolean
 * `APPIUM_SERVER`
 
 ### Run
