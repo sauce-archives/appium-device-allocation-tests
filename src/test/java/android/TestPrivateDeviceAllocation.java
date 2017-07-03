@@ -24,8 +24,10 @@ public class TestPrivateDeviceAllocation {
 		driver = new AndroidDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
 
 		System.out.println(capabilities.toString());
-		System.out.println(driver.getCapabilities().getCapability("testobject_test_report_url"));
-		System.out.println(driver.getCapabilities().getCapability("testobject_test_live_view_url"));
+		//System.out.println(driver.getCapabilities().getCapability("testobject_test_report_url"));
+		//System.out.println(driver.getCapabilities().getCapability("testobject_test_live_view_url"));
+		System.out.println(driver.getCapabilities().getCapability("testobject_device: " + "testobject_device"));
+		System.out.println(driver.getCapabilities().getCapability("deviceName: " + "deviceName"));
 	}
 
 	@Test
