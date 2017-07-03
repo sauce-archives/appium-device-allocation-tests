@@ -20,6 +20,8 @@ public class TestAllocationByDeviceName {
 
 		capabilities.setCapability("testobject_api_key", System.getenv("TESTOBJECT_API_KEY"));
 		capabilities.setCapability("deviceName", System.getenv("DEVICE_NAME"));
+		// Required for iOS 10+ devices , but works with iOS 9+
+		capabilities.setCapability("automationName", "XCUITest");
 
 		driver = new IOSDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
 	}

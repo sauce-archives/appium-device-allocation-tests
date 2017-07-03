@@ -20,6 +20,8 @@ public class TestPrivateDeviceAllocation {
 
 		capabilities.setCapability("testobject_api_key", System.getenv("TESTOBJECT_API_KEY"));
 		capabilities.setCapability("privateDevicesOnly", System.getenv("PRIVATE_DEVICES_ONLY"));
+		// Required for iOS 10+ devices , but works with iOS 9+
+		capabilities.setCapability("automationName", "XCUITest");
 
 		driver = new IOSDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
 	}

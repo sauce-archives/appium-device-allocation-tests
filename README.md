@@ -1,19 +1,11 @@
 # appium-device-allocation-tests
-This project is for testing device allocation on TestObject platform
+This Maven Junit project is for testing device allocation on TestObject platform.
 
 ######
 
 ## Adding new tests
-All Test classes should start with either `TestAndroid` or `TestIOS`.
+All Test classes should start with the word `Test`.
 
 
 ## Run
-Run this project in two separate jenkins tasks (Android, IOS).
-
-
-##### Android
-Run Android using maven command `-Dtest=TestAndroid* clean test`
-
-
-##### IOS
-Run Android using maven command `-Dtest=TestIOS* clean test`
+Try to run this project in two separate jenkins tasks (Android, IOS) and use `-Dtest=android/* clean test` maven command to run android tests and use `-Dtest=ios/* clean test` to run iOS ones. .
