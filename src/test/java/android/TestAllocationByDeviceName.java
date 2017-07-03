@@ -26,7 +26,7 @@ public class TestAllocationByDeviceName {
 
 	@Test
 	public void printContext() throws Exception {
-		System.out.println(driver.getContext());
+		System.out.println("Context is " + driver.getContext());
 	}
 
 	@After
