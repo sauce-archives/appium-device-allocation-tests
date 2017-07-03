@@ -23,6 +23,10 @@ public class TestAllocationByDeviceNameAndPlatformVersion {
 		capabilities.setCapability("platformVersion", System.getenv("DEVICE_PLATFORM_VERSION"));
 
 		driver = new AndroidDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
+
+		System.out.println("Desired Capabilities: " + capabilities.toString());
+		System.out.println(driver.getCapabilities().getCapability("testobject_test_report_url"));
+		System.out.println(driver.getCapabilities().getCapability("testobject_test_live_view_url"));
 	}
 
 	@Test
