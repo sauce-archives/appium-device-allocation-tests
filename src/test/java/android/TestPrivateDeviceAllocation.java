@@ -19,7 +19,7 @@ public class TestPrivateDeviceAllocation {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 
 		capabilities.setCapability("testobject_api_key", System.getenv("TESTOBJECT_API_KEY"));
-		capabilities.setCapability("privateDevicesOnly", System.getenv("PRIVATE_DEVICES_ONLY"));
+		capabilities.setCapability("privateDevicesOnly", true);
 
 		driver = new AndroidDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
 	}
