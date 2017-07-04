@@ -22,9 +22,8 @@ public class TestAllocationByDeviceDescriptorIdAndPoolId {
 		capabilities.setCapability("testobject_device", System.getenv("DEVICE_DESCRIPTOR_ID"));
 		capabilities.setCapability("testobject_pool_id", System.getenv("TESTOBJECT_POOL_ID"));
 
-		driver = new AndroidDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
-
 		System.out.println(capabilities.toString());
+		driver = new AndroidDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
 		System.out.println(driver.getCapabilities().getCapability("testobject_test_report_url"));
 	}
 

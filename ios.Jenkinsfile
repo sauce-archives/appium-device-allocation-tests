@@ -4,11 +4,11 @@ node {
     mvn = mvnHome + '/bin/mvn'
 
 	lock(resource: env.DEVICE_DESCRIPTOR_ID) {
-		sh "$mvn -Dtest=ios/* clean test"
+		sh "$mvn -Dtest=ios/TestA* clean test"
 	}
 
 	// current private device on staging
 	lock(resource: 'iPhone_SE_16GB_ios9_real_1') {
-		sh "$mvn -Dtest=ios/*private* clean test"
+		sh "$mvn -Dtest=ios/*Private* clean test"
 	}
 }

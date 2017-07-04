@@ -22,9 +22,8 @@ public class TestAllocationByDeviceName {
 		capabilities.setCapability("deviceName", System.getenv("DEVICE_NAME"));
 		capabilities.setCapability("automationName", "XCUITest");
 
-		driver = new IOSDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
-
 		System.out.println(capabilities.toString());
+		driver = new IOSDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
 		System.out.println(driver.getCapabilities().getCapability("testobject_test_report_url"));
 	}
 

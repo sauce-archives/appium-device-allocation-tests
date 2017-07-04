@@ -21,9 +21,8 @@ public class TestAllocationByPlatformVersion {
 		capabilities.setCapability("testobject_api_key", System.getenv("TESTOBJECT_API_KEY"));
 		capabilities.setCapability("platformVersion", System.getenv("DEVICE_PLATFORM_VERSION"));
 
-		driver = new AndroidDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
-
 		System.out.println(capabilities.toString());
+		driver = new AndroidDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
 		System.out.println(driver.getCapabilities().getCapability("testobject_test_report_url"));
 	}
 

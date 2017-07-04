@@ -22,9 +22,8 @@ public class TestAllocationByPlatformVersion {
 		capabilities.setCapability("platformVersion", System.getenv("DEVICE_PLATFORM_VERSION"));
 		capabilities.setCapability("automationName", "XCUITest");
 
-		driver = new IOSDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
-
 		System.out.println(capabilities.toString());
+		driver = new IOSDriver(new URL(System.getenv("APPIUM_SERVER")), capabilities);
 		System.out.println(driver.getCapabilities().getCapability("testobject_test_report_url"));
 	}
 
