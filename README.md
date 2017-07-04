@@ -15,4 +15,4 @@ All Test classes should start with the word `Test`.
 * `APPIUM_SERVER`
 
 ### Run
-Try to run this project in two separate jenkins tasks (Android, IOS) and use `-Dtest=android/* clean test` maven command for Android and `-Dtest=ios/* clean test` for iOS.
+Try to run this project in two separate jenkins tasks (Android, IOS) and use `-Dtest=android/* clean test` maven command for Android and `-Dtest=ios/* clean test` for iOS in a maven Project. Or better use a Pipeline with Jenkinsfiles.
