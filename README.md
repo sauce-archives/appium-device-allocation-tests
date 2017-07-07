@@ -20,26 +20,26 @@ Or use the following *Maven commands:*
 
 - *iOS tests with PrivateDevice category*
 
-`-Dgroups=org.testobject.appium.PrivateDevice -Dtest=ios/* clean test` 
+`-Dgroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Ios* clean test` 
 
 - *iOS tests without PrivateDevice category*
 
-`-DexcludedGroups=org.testobject.appium.PrivateDevice -Dtest=ios/* clean test` 
+`-DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Ios* clean testt` 
 
 - *All iOS tests*
 
-`-Dtest=ios/* clean test` 
+`-Dtest=Ios* clean test` 
 
 -----
 
 - *Android tests with PrivateDevice category*
 
-`-Dgroups=org.testobject.appium.PrivateDevice -Dtest=android/* clean test` 
+`-Dgroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Android* clean test` 
 
 - *Android tests without the PrivateDevice category*
 
-`-DexcludedGroups=org.testobject.appium.PrivateDevice -Dtest=android/* clean test`
+`-DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Android* clean test`
 
 - *All Android tests*
 
-`-Dtest=android/* clean test`
+`-Dtest=Android* clean test`

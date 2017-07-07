@@ -1,4 +1,4 @@
-package org.testobject.appium;
+package org.testobject.appium.allocationtests;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;

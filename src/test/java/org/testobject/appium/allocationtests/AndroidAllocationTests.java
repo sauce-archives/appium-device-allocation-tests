@@ -1,11 +1,9 @@
-package org.testobject.appium.android;
+package org.testobject.appium.allocationtests;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.testobject.appium.PrivateDevice;
-import org.testobject.appium.TestBuilder;
 
-public class AllocationTest {
+public class AndroidAllocationTests {
 
 	@Test
 	public void ByDeviceDescriptorIdAndPoolId() {
