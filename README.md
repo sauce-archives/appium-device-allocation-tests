@@ -3,9 +3,6 @@ This Maven Junit project is for testing device allocation on TestObject platform
 
 ######
 
-### Adding new tests
-All Test classes should start with the word `Test`.
-
 ### Environment Variables
 * `TESTOBJECT_API_KEY`
 * `DEVICE_DESCRIPTOR_ID`

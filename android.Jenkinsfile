@@ -5,13 +5,18 @@ node {
 
     stage('Run') {
 
-		lock(resource: env.DEVICE_DESCRIPTOR_ID) {
-			sh "$mvn -DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Android* clean test"
-		}
-
-		lock(resource: env.PRIVATE_DEVICE_DESCRIPTOR_ID) {
-			sh "$mvn -Dgroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Android* clean test"
-		}
+		parallel (
+			publicDevice: {
+				lock(resource: env.DEVICE_DESCRIPTOR_ID) {
+					sh "$mvn -DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Android* clean test"
+				}
+			},
+			privateDevice: {
+				lock(resource: env.PRIVATE_DEVICE_DESCRIPTOR_ID) {
+                	sh "$mvn -Dgroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Android* clean test"
+                }
+			}
+		)
 
 	}
 
