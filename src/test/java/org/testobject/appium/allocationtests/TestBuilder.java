@@ -3,7 +3,6 @@ package org.testobject.appium.allocationtests;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
@@ -79,7 +78,6 @@ public class TestBuilder {
 		return this;
 	}
 
-	@Test
 	public void test() {
 		System.out.println("Context is " + driver.getContext());
 		closeConnection();
