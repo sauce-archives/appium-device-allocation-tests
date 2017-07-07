@@ -24,7 +24,7 @@ Or use the following *Maven commands:*
 
 - *iOS tests without PrivateDevice category*
 
-`-DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Ios* clean testt` 
+`-DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Ios* clean test` 
 
 - *All iOS tests*
 
