@@ -19,19 +19,27 @@ Create two Pipeline Jenkins Items (IOS, Android) and use the Jenkinsfiles to run
 Or use the following *Maven commands:* 
 
 - *iOS tests with PrivateDevice category*
+
 `-Dgroups=org.testobject.appium.PrivateDevice -Dtest=ios/* clean test` 
 
 - *iOS tests without PrivateDevice category*
+
 `-DexcludedGroups=org.testobject.appium.PrivateDevice -Dtest=ios/* clean test` 
 
 - *All iOS tests*
+
 `-Dtest=ios/* clean test` 
 
 -----
 
 - *Android tests with PrivateDevice category*
+
 `-Dgroups=org.testobject.appium.PrivateDevice -Dtest=android/* clean test` 
+
 - *Android tests without the PrivateDevice category*
+
 `-DexcludedGroups=org.testobject.appium.PrivateDevice -Dtest=android/* clean test`
+
 - *All Android tests*
+
 `-Dtest=android/* clean test`
