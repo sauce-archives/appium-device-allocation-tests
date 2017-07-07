@@ -8,12 +8,12 @@ node {
 		parallel (
 			publicDevice: {
 				lock(resource: env.DEVICE_DESCRIPTOR_ID) {
-					sh "$mvn -DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Android* clean test"
+					sh "$mvn -DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Android* -q clean test"
 				}
 			},
 			privateDevice: {
 				lock(resource: env.PRIVATE_DEVICE_DESCRIPTOR_ID) {
-                	sh "$mvn -Dgroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Android* clean test"
+                	sh "$mvn -Dgroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Android* -q clean test"
                 }
 			}
 		)
