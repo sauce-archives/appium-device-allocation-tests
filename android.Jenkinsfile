@@ -9,7 +9,6 @@ node {
 			sh "$mvn -DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Android* clean test"
 		}
 
-		// current private device on staging
 		lock(resource: 'Motorola_Moto_E_2nd_gen_real') {
 			sh "$mvn -Dgroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Android* clean test"
 		}
