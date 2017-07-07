@@ -1,12 +1,8 @@
 node {
-    git 'https://github.com/testobject/appium-device-allocation-tests.git'
-    mvnHome = tool 'M3'
-    mvn = mvnHome + '/bin/mvn'
-
     stage('Run') {
 
 		lock(resource: env.DEVICE_DESCRIPTOR_ID) {
-			sh "$mvn -Dtest=ios/TestA* clean test"
+			sh "mvn -Dtest=ios/TestA* -DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice clean test"
 		}
 
 		// current private device on staging
