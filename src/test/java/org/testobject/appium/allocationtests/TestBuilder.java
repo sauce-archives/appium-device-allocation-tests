@@ -17,7 +17,8 @@ public class TestBuilder {
 
 	public TestBuilder() {
 		capabilities.setCapability("testobject_api_key", getEnvOrFail("TESTOBJECT_API_KEY"));
-		capabilities.setCapability("testobject_session_creation_timeout", getEnvOrDefault("TESTOBJECT_TIMEOUT", "120000"));
+		capabilities.setCapability("testobject_session_creation_retry", getEnvOrDefault("TESTOBJECT_ALLOCATION_RETRIES", "1"));
+		capabilities.setCapability("testobject_session_creation_timeout", getEnvOrDefault("TESTOBJECT_TIMEOUT", "300000")); //5 minutes
 	}
 
 	public TestBuilder setDeviceDescriptorId() {
