@@ -12,13 +12,11 @@ node {
 			}
 
 			lock(resource: env.PRIVATE_DEVICE_DESCRIPTOR_ID) {
-        		sh "$mvn -Dgroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Android* -q clean test"
+				sh "$mvn -Dgroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Android* -q clean test"
         	}
-
         } else {
         	sh "$mvn -Dtest=Ios* -q clean test"
         }
 
 	}
-
 }
