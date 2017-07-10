@@ -10,7 +10,7 @@ def runTest() {
 				try {
 					sh "mvn -DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Ios* -q clean test"
 				} finally {
-					junit "**/test-results/*.xml"
+					junit "**/target/surefire-reports/*.xml"
 				}
             }
         }
