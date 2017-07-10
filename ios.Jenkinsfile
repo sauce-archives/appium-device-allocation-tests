@@ -1,22 +1,57 @@
-node {
-    git 'https://github.com/testobject/appium-device-allocation-tests.git'
-    mvnHome = tool 'M3'
-    mvn = mvnHome + '/bin/mvn'
-    def staging = env.APPIUM_SERVER.contains("staging.testobject.org") ? true : false
+#!groovy
 
-    stage ('Run') {
-
-    	if (staging) {
-			lock(resource: env.DEVICE_DESCRIPTOR_ID) {
-				sh "$mvn -DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Ios* -q clean test"
-			}
-
-			lock(resource: env.PRIVATE_DEVICE_DESCRIPTOR_ID) {
-				sh "$mvn -Dgroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Ios* -q clean test"
-        	}
-        } else {
-        	sh "$mvn -Dtest=Ios* -q clean test"
+def runTest() {
+    node {
+		stage("checkout") {
+			checkout scm
+		}
+        stage("test") {
+        	docker.image("maven:3.5").inside {
+				try {
+					sh "mvn -DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Ios* -q clean test"
+				} finally {
+					junit "**/test-results/*.xml"
+				}
+            }
         }
+    }
+}
 
+def runPrivateTest() {
+    node {
+    	stage("checkout") {
+    		checkout scm
+    	}
+        stage("private test") {
+        	docker.image("maven:3.5").inside {
+				try {
+					sh "mvn -Dgroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Ios* -q clean test"
+				} finally {
+					junit "**/test-results/*.xml"
+				}
+            }
+        }
+    }
+}
+
+if (env.APPIUM_SERVER.contains("staging.testobject.org")) {
+    lock (resource: env.DEVICE_DESCRIPTOR_ID) {
+    	runTest()
 	}
+	lock(resource: env.PRIVATE_DEVICE_DESCRIPTOR_ID) {
+		runPrivateTest()
+    }
+} else {
+    try {
+        runTest()
+        runPrivateTest()
+        if (env.SUCCESS_NOTIFICATION_ENABLED) {
+            slackSend channel: "#${env.SLACK_CHANNEL}", color: "good", message: "`${env.JOB_BASE_NAME}` passed (<${BUILD_URL}|open>)", teamDomain: "${env.SLACK_SUBDOMAIN}", token: "${env.SLACK_TOKEN}"
+        }
+    } catch (err) {
+        if (env.APPIUM_SERVER.contains("testobject.com") || env.FAILURE_NOTIFICATION_ENABLED) {
+            slackSend channel: "#${env.SLACK_CHANNEL}", color: "bad", message: "`${env.JOB_BASE_NAME}` failed: $err (<${BUILD_URL}|open>)", teamDomain: "${env.SLACK_SUBDOMAIN}", token: "${env.SLACK_TOKEN}"
+        }
+        throw err
+    }
 }
