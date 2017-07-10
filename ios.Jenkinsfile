@@ -27,7 +27,7 @@ def runPrivateTest() {
 				try {
 					sh "mvn -Dgroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Ios* -q clean test"
 				} finally {
-					junit "target/surefire-reports/TEST-*.xml"
+					junit "**/target/surefire-reports/*.xml"
 				}
             }
         }

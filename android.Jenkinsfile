@@ -10,7 +10,7 @@ def runTest() {
 				try {
 					sh "mvn -DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Android* -q clean test"
 				} finally {
-					junit "target/surefire-reports/TEST-*.xml"
+					junit "**/target/surefire-reports/*.xml"
 				}
             }
         }
