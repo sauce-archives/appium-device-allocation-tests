@@ -36,6 +36,12 @@ public class TestBuilder {
 		return this;
 	}
 
+
+	public TestBuilder setPlatformName(String platformName) {
+		capabilities.setCapability("platformName", platformName);
+		return this;
+	}
+
 	public TestBuilder setPoolId() {
 		capabilities.setCapability("testobject_pool_id", System.getenv("TESTOBJECT_POOL_ID"));
 		return this;

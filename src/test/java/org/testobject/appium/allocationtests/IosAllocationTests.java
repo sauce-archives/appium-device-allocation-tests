@@ -35,6 +35,7 @@ public class IosAllocationTests {
 	public void ByPlatformVersion() {
 		new TestBuilder()
 				.setPlatformVersion()
+				.setPlatformName("ios")
 				.createIOSDriver()
 				.test();
 	}

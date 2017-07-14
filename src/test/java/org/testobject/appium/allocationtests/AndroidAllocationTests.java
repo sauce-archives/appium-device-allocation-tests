@@ -34,6 +34,7 @@ public class AndroidAllocationTests {
 	@Test
 	public void ByPlatformVersion() {
 		new TestBuilder()
+				.setPlatformName("android")
 				.setPlatformVersion()
 				.createAndroidDriver()
 				.test();
