@@ -6,7 +6,7 @@ def runTest() {
 			checkout scm
 		}
         stage("test") {
-        	docker.image("maven:3.5").inside {
+        	docker.image("maven:3.5").inside("-v $HOME/.m2:/root/.m2") {
 				try {
 					sh "mvn -DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Android* clean test"
 				} finally {
