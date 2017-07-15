@@ -8,7 +8,7 @@ def runTest() {
         stage("test") {
         	docker.image("maven:3.5").inside {
 				try {
-					sh "mvn -DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Ios* -q clean test"
+					sh "mvn -DexcludedGroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Ios* clean test"
 				} finally {
 					junit "**/target/surefire-reports/*.xml"
 				}
@@ -25,7 +25,7 @@ def runPrivateTest() {
         stage("private test") {
         	docker.image("maven:3.5").inside {
 				try {
-					sh "mvn -Dgroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Ios* -q clean test"
+					sh "mvn -Dgroups=org.testobject.appium.allocationtests.PrivateDevice -Dtest=Ios* clean test"
 				} finally {
 					junit "**/target/surefire-reports/*.xml"
 				}
