@@ -86,11 +86,9 @@ public class TestBuilder {
 
 	private void closeConnection() {
 		System.out.println(driver.getCapabilities().getCapability("testobject_test_report_url"));
-		System.out.println("Calling driver.quit() at " + Instant.now());
 		if (driver != null) {
 			driver.quit();
 		}
-		System.out.println("Test finished at " + Instant.now());
 	}
 
 	private String getEnvOrDefault(String env, String s) {
