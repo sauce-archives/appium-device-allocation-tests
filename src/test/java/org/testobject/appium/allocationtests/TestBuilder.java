@@ -22,6 +22,8 @@ public class TestBuilder {
 		capabilities.setCapability("testobject_session_creation_retry", getEnvOrDefault("TESTOBJECT_SESSION_CREATION_RETRY", "1"));
 		capabilities.setCapability("testobject_session_creation_timeout",
 				getEnvOrDefault("TESTOBJECT_SESSION_CREATION_TIMEOUT", "300000")); //5 minutes
+		capabilities.setCapability("testobject_appium_version", getEnvOrDefault("TESTOBJECT_APPIUM_VERSION",
+				"1.6.4"));
 	}
 
 	public TestBuilder setDeviceDescriptorId() {
