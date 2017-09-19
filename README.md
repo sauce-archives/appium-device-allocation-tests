@@ -7,6 +7,7 @@ This Maven Junit project is for testing device allocation on TestObject platform
 Required:
 * `TESTOBJECT_API_KEY` - api key associated with you TestObject account for Appium test suites.
 * `APPIUM_SERVER` - URL that points to the devices hub.
+* `REST_API` - URL that points to the rest api.
 For other configuration properties refer the source.
 
 ### Run
