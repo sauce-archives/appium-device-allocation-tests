@@ -20,8 +20,7 @@ public class TestBuilder extends EnvironmentVariables {
 		capabilities.setCapability("testobject_uuid", UUID.randomUUID().toString());
 		capabilities.setCapability("testobject_api_key", getEnvOrFail(TESTOBJECT_API_KEY));
 		capabilities.setCapability("testobject_session_creation_retry", getEnvOrDefault(TESTOBJECT_SESSION_CREATION_RETRY, "1"));
-		capabilities.setCapability("testobject_session_creation_timeout",
-				getEnvOrDefault(TESTOBJECT_SESSION_CREATION_TIMEOUT, "300000")); //5 minutes
+		capabilities.setCapability("testobject_session_creation_timeout",getEnvOrDefault(TESTOBJECT_SESSION_CREATION_TIMEOUT, "300000")); //5 minutes
 	}
 
 	public TestBuilder setDeviceDescriptorId() {
