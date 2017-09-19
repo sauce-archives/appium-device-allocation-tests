@@ -27,7 +27,7 @@ public class EnvironmentVariables {
 
 	public static String getEnvOrFail(String env) {
 		if (env == null) {
-			throw new RuntimeException("Missing obligatory environment variables. Hint: Make sure you supply at least `TESTOBJECT_API_KEY` and `APPIUM_SERVER`");
+			throw new RuntimeException("Missing obligatory environment variables. Hint: Make sure you supply at least `TESTOBJECT_API_KEY` and `APPIUM_SERVER` or maybe `REST_API` ");
 		} else {
 			return env;
 		}

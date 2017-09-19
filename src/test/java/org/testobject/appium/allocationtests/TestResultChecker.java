@@ -18,7 +18,7 @@ public class TestResultChecker extends EnvironmentVariables {
 		String userId = driver.getCapabilities().getCapability("testobject_user_id").toString();
 		String projectId = driver.getCapabilities().getCapability("testobject_project_id").toString();
 
-		TestObjectClient client = TestObjectClient.Factory.create(REST_API);
+		TestObjectClient client = TestObjectClient.Factory.create(getEnvOrFail(REST_API));
 		client.login(userId, PASSWORD);
 		device = client.getTestReport(userId, projectId, reportId).getDevice();
 	}
