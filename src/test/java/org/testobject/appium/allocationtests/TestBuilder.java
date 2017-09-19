@@ -34,7 +34,7 @@ public class TestBuilder extends EnvironmentVariables {
 	}
 
 	public TestBuilder setPlatformVersion() {
-		capabilities.setCapability("platformVersion", DEVICE_PLATFORM_VERSION);
+		capabilities.setCapability("platformVersion", PLATFORM_VERSION);
 		return this;
 	}
 
@@ -58,6 +58,11 @@ public class TestBuilder extends EnvironmentVariables {
 		return this;
 	}
 
+	public TestBuilder setRegEx(String regEx) {
+		capabilities.setCapability("deviceName", regEx);
+		return this;
+	}
+
 	public TestBuilder createAndroidDriver() {
 		System.out.println(capabilities.toString());
 		Instant startTime = Instant.now();
@@ -72,6 +77,7 @@ public class TestBuilder extends EnvironmentVariables {
 	}
 
 	public TestBuilder createIOSDriver() {
+
 		System.out.println(capabilities.toString());
 		Instant startTime = Instant.now();
 		try {
@@ -97,11 +103,10 @@ public class TestBuilder extends EnvironmentVariables {
 		}
 		Instant endTime = Instant.now();
 		System.out.println("Closing connection time: " + startTime.until(endTime, ChronoUnit.SECONDS) + "s");
-		System.out.println(driver.getCapabilities().getCapability("testobject_test_report_url"));
+		System.out.println(driver.getCapabilities().getCapability("testobject_test_report_url") + "\n");
 	}
 
 	public TestResultChecker createResultChecker() {
 		return new TestResultChecker(driver);
 	}
-
 }

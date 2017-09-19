@@ -14,7 +14,7 @@ public class AndroidAllocationTests {
 				.test()
 				.createResultChecker()
 				.checkDeviceDescriptorId()
-				.checkPlatformName();
+				.checkPlatformName("ANDROID");
 	}
 
 	@Test
@@ -25,7 +25,7 @@ public class AndroidAllocationTests {
 				.test()
 				.createResultChecker()
 				.checkDeviceName()
-				.checkPlatformName();
+				.checkPlatformName("ANDROID");
 	}
 
 	@Test
@@ -38,7 +38,7 @@ public class AndroidAllocationTests {
 				.createResultChecker()
 				.checkDeviceName()
 				.checkPlatformVersion()
-				.checkPlatformName();
+				.checkPlatformName("ANDROID");
 	}
 
 	@Test
@@ -49,7 +49,19 @@ public class AndroidAllocationTests {
 				.test()
 				.createResultChecker()
 				.checkPlatformVersion()
-				.checkPlatformName();
+				.checkPlatformName("ANDROID");
+	}
+
+	@Test
+	public void ByRegEx() {
+		String regEx = "LG.*";
+		new TestBuilder()
+				.setRegEx(regEx)
+				.createAndroidDriver()
+				.test()
+				.createResultChecker()
+				.checkMatchesRegEx(regEx)
+				.checkPlatformName("ANDROID");
 	}
 
 	@Test
@@ -61,7 +73,7 @@ public class AndroidAllocationTests {
 				.test()
 				.createResultChecker()
 				.checkPrivateDeviceId()
-				.checkPlatformName();
+				.checkPlatformName("ANDROID");
 	}
 
 }

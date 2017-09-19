@@ -6,8 +6,7 @@ public class EnvironmentVariables {
 	public static final String APPIUM_SERVER = System.getenv("APPIUM_SERVER");
 	public static final String DEVICE_DESCRIPTOR_ID = System.getenv("DEVICE_DESCRIPTOR_ID");
 	public static final String DEVICE_NAME = System.getenv("DEVICE_NAME");
-	public static final String PLATFORM_NAME = System.getenv("PLATFORM_NAME");
-	public static final String DEVICE_PLATFORM_VERSION = System.getenv("DEVICE_PLATFORM_VERSION");
+	public static final String PLATFORM_VERSION = System.getenv("PLATFORM_VERSION");
 	public static final String TESTOBJECT_POOL_ID = System.getenv("TESTOBJECT_POOL_ID");
 	public static final String TESTOBJECT_SESSION_CREATION_TIMEOUT = System.getenv("TESTOBJECT_SESSION_CREATION_TIMEOUT");
 	public static final String TESTOBJECT_SESSION_CREATION_RETRY = System.getenv("TESTOBJECT_SESSION_CREATION_RETRY");

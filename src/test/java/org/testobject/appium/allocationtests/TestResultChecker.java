@@ -6,6 +6,7 @@ import org.testobject.rest.api.model.DeviceDescriptor;
 
 import java.util.regex.Pattern;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class TestResultChecker extends EnvironmentVariables {
@@ -13,11 +14,6 @@ public class TestResultChecker extends EnvironmentVariables {
 	private DeviceDescriptor.DeviceContainer device;
 
 	public TestResultChecker(AppiumDriver driver) {
-		try {
-			Thread.sleep(9000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		int reportId = Integer.valueOf(driver.getCapabilities().getCapability("testobject_test_report_id").toString());
 		String userId = driver.getCapabilities().getCapability("testobject_user_id").toString();
 		String projectId = driver.getCapabilities().getCapability("testobject_project_id").toString();
@@ -28,27 +24,37 @@ public class TestResultChecker extends EnvironmentVariables {
 	}
 
 	public TestResultChecker checkDeviceDescriptorId() {
-		assertTrue(device.id.equals(DEVICE_DESCRIPTOR_ID));
+		assertEquals("Device descriptor id should be " + DEVICE_DESCRIPTOR_ID + " but found " + device.id,
+				device.id, DEVICE_DESCRIPTOR_ID);
 		return this;
 	}
 
 	public TestResultChecker checkDeviceName() {
-		assertTrue(Pattern.compile(device.name, Pattern.CASE_INSENSITIVE).matcher(DEVICE_NAME).matches());
+		assertTrue("Device name should be " + DEVICE_NAME + " but found " + device.name, device.name.equalsIgnoreCase(DEVICE_NAME));
 		return this;
 	}
 
-	public TestResultChecker checkPlatformName() {
-		assertTrue(device.os.name().equalsIgnoreCase(PLATFORM_NAME));
+	public TestResultChecker checkMatchesRegEx(String regEx) {
+		assertTrue("Device name should matches " + regEx + " but found " + device.name,
+				Pattern.compile(regEx, Pattern.CASE_INSENSITIVE).matcher(device.name).matches());
+		return this;
+	}
+
+	public TestResultChecker checkPlatformName(String platformName) {
+		assertTrue("OS name should be " + platformName + " but found " + device.os.name(),
+				device.os.name().equalsIgnoreCase(platformName));
 		return this;
 	}
 
 	public TestResultChecker checkPlatformVersion() {
-		assertTrue(device.osVersion.startsWith(DEVICE_PLATFORM_VERSION));
+		assertTrue("OS version should start with " + device.osVersion + " but found " + PLATFORM_VERSION,
+				device.osVersion.startsWith(PLATFORM_VERSION));
 		return this;
 	}
 
 	public TestResultChecker checkPrivateDeviceId() {
-		assertTrue(device.id.equals(PRIVATE_DEVICE_DESCRIPTOR_ID));
+		assertEquals("Private device should be " + DEVICE_DESCRIPTOR_ID + " but found " + device.id, device.id,
+				PRIVATE_DEVICE_DESCRIPTOR_ID);
 		return this;
 	}
 }
