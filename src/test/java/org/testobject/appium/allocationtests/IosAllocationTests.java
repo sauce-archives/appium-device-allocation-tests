@@ -11,7 +11,10 @@ public class IosAllocationTests {
 				.setDeviceDescriptorId()
 				.setPoolId()
 				.createIOSDriver()
-				.test();
+				.test()
+				.createResultChecker()
+				.checkDeviceDescriptorId()
+				.checkPlatformName();
 	}
 
 	@Test
@@ -19,7 +22,10 @@ public class IosAllocationTests {
 		new TestBuilder()
 				.setDeviceName()
 				.createIOSDriver()
-				.test();
+				.test()
+				.createResultChecker()
+				.checkDeviceName()
+				.checkPlatformName();
 	}
 
 	@Test
@@ -28,7 +34,11 @@ public class IosAllocationTests {
 				.setDeviceName()
 				.setPlatformVersion()
 				.createIOSDriver()
-				.test();
+				.test()
+				.createResultChecker()
+				.checkDeviceName()
+				.checkPlatformVersion()
+				.checkPlatformName();
 	}
 
 	@Test
@@ -36,7 +46,10 @@ public class IosAllocationTests {
 		new TestBuilder()
 				.setPlatformVersion()
 				.createIOSDriver()
-				.test();
+				.test()
+				.createResultChecker()
+				.checkPlatformVersion()
+				.checkPlatformName();
 	}
 
 	@Test
@@ -45,7 +58,10 @@ public class IosAllocationTests {
 		new TestBuilder()
 				.setPrivateDeviceOnly()
 				.createIOSDriver()
-				.test();
+				.test()
+				.createResultChecker()
+				.checkPrivateDeviceId()
+				.checkPlatformName();
 	}
 
 }

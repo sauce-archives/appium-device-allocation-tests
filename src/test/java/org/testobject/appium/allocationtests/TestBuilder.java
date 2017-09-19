@@ -11,31 +11,31 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
-public class TestBuilder {
+public class TestBuilder extends EnvironmentVariables {
 
 	private AppiumDriver driver;
 	private DesiredCapabilities capabilities = new DesiredCapabilities();
 
 	public TestBuilder() {
 		capabilities.setCapability("testobject_uuid", UUID.randomUUID().toString());
-		capabilities.setCapability("testobject_api_key", getEnvOrFail("TESTOBJECT_API_KEY"));
-		capabilities.setCapability("testobject_session_creation_retry", getEnvOrDefault("TESTOBJECT_SESSION_CREATION_RETRY", "1"));
+		capabilities.setCapability("testobject_api_key", getEnvOrFail(TESTOBJECT_API_KEY));
+		capabilities.setCapability("testobject_session_creation_retry", getEnvOrDefault(TESTOBJECT_SESSION_CREATION_RETRY, "1"));
 		capabilities.setCapability("testobject_session_creation_timeout",
-				getEnvOrDefault("TESTOBJECT_SESSION_CREATION_TIMEOUT", "300000")); //5 minutes
+				getEnvOrDefault(TESTOBJECT_SESSION_CREATION_TIMEOUT, "300000")); //5 minutes
 	}
 
 	public TestBuilder setDeviceDescriptorId() {
-		capabilities.setCapability("testobject_device", System.getenv("DEVICE_DESCRIPTOR_ID"));
+		capabilities.setCapability("testobject_device", DEVICE_DESCRIPTOR_ID);
 		return this;
 	}
 
 	public TestBuilder setDeviceName() {
-		capabilities.setCapability("deviceName", System.getenv("DEVICE_NAME"));
+		capabilities.setCapability("deviceName", DEVICE_NAME);
 		return this;
 	}
 
 	public TestBuilder setPlatformVersion() {
-		capabilities.setCapability("platformVersion", System.getenv("DEVICE_PLATFORM_VERSION"));
+		capabilities.setCapability("platformVersion", DEVICE_PLATFORM_VERSION);
 		return this;
 	}
 
@@ -45,7 +45,7 @@ public class TestBuilder {
 	}
 
 	public TestBuilder setPoolId() {
-		capabilities.setCapability("testobject_pool_id", System.getenv("TESTOBJECT_POOL_ID"));
+		capabilities.setCapability("testobject_pool_id", TESTOBJECT_POOL_ID);
 		return this;
 	}
 
@@ -62,9 +62,8 @@ public class TestBuilder {
 	public TestBuilder createAndroidDriver() {
 		System.out.println(capabilities.toString());
 		Instant startTime = Instant.now();
-		System.out.println("Began allocation driver at " + startTime);
 		try {
-			driver = new AndroidDriver(new URL(getEnvOrFail("APPIUM_SERVER")), capabilities);
+			driver = new AndroidDriver(new URL(getEnvOrFail(APPIUM_SERVER)), capabilities);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -76,9 +75,8 @@ public class TestBuilder {
 	public TestBuilder createIOSDriver() {
 		System.out.println(capabilities.toString());
 		Instant startTime = Instant.now();
-		System.out.println("Began allocation driver at " + startTime);
 		try {
-			driver = new IOSDriver(new URL(getEnvOrFail("APPIUM_SERVER")), capabilities);
+			driver = new IOSDriver(new URL(getEnvOrFail(APPIUM_SERVER)), capabilities);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -87,34 +85,24 @@ public class TestBuilder {
 		return this;
 	}
 
-	public void test() {
+	public TestBuilder test() {
 		System.out.println("Context is " + driver.getContext());
 		closeConnection();
+		return this;
 	}
 
 	private void closeConnection() {
-		System.out.println(driver.getCapabilities().getCapability("testobject_test_report_url"));
+		Instant startTime = Instant.now();
 		if (driver != null) {
 			driver.quit();
 		}
+		Instant endTime = Instant.now();
+		System.out.println("Closing connection time: " + startTime.until(endTime, ChronoUnit.SECONDS) + "s");
+		System.out.println(driver.getCapabilities().getCapability("testobject_test_report_url"));
 	}
 
-	private String getEnvOrDefault(String env, String s) {
-		String var = System.getenv(env);
-		if (var == null) {
-			return s;
-		} else {
-			return var;
-		}
-	}
-
-	private String getEnvOrFail(String env) {
-		String var = System.getenv(env);
-		if (var == null) {
-			throw new RuntimeException(env + " is null");
-		} else {
-			return var;
-		}
+	public TestResultChecker createResultChecker() {
+		return new TestResultChecker(driver);
 	}
 
 }

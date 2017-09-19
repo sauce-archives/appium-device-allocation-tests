@@ -11,7 +11,10 @@ public class AndroidAllocationTests {
 				.setDeviceDescriptorId()
 				.setPoolId()
 				.createAndroidDriver()
-				.test();
+				.test()
+				.createResultChecker()
+				.checkDeviceDescriptorId()
+				.checkPlatformName();
 	}
 
 	@Test
@@ -19,7 +22,10 @@ public class AndroidAllocationTests {
 		new TestBuilder()
 				.setDeviceName()
 				.createAndroidDriver()
-				.test();
+				.test()
+				.createResultChecker()
+				.checkDeviceName()
+				.checkPlatformName();
 	}
 
 	@Test
@@ -28,7 +34,11 @@ public class AndroidAllocationTests {
 				.setDeviceName()
 				.setPlatformVersion()
 				.createAndroidDriver()
-				.test();
+				.test()
+				.createResultChecker()
+				.checkDeviceName()
+				.checkPlatformVersion()
+				.checkPlatformName();
 	}
 
 	@Test
@@ -36,7 +46,10 @@ public class AndroidAllocationTests {
 		new TestBuilder()
 				.setPlatformVersion()
 				.createAndroidDriver()
-				.test();
+				.test()
+				.createResultChecker()
+				.checkPlatformVersion()
+				.checkPlatformName();
 	}
 
 	@Test
@@ -45,7 +58,10 @@ public class AndroidAllocationTests {
 		new TestBuilder()
 				.setPrivateDeviceOnly()
 				.createAndroidDriver()
-				.test();
+				.test()
+				.createResultChecker()
+				.checkPrivateDeviceId()
+				.checkPlatformName();
 	}
 
 }
