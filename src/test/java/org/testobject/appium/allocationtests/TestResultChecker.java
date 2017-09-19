@@ -13,6 +13,11 @@ public class TestResultChecker extends EnvironmentVariables {
 	private DeviceDescriptor.DeviceContainer device;
 
 	public TestResultChecker(AppiumDriver driver) {
+		try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		int reportId = Integer.valueOf(driver.getCapabilities().getCapability("testobject_test_report_id").toString());
 		String userId = driver.getCapabilities().getCapability("testobject_user_id").toString();
 		String projectId = driver.getCapabilities().getCapability("testobject_project_id").toString();
