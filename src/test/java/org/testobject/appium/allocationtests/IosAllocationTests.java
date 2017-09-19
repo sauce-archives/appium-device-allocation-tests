@@ -11,7 +11,10 @@ public class IosAllocationTests {
 				.setDeviceDescriptorId()
 				.setPoolId()
 				.createIOSDriver()
-				.test();
+				.test()
+				.createResultChecker()
+				.checkDeviceDescriptorId()
+				.checkPlatformName("IOS");
 	}
 
 	@Test
@@ -19,7 +22,10 @@ public class IosAllocationTests {
 		new TestBuilder()
 				.setDeviceName()
 				.createIOSDriver()
-				.test();
+				.test()
+				.createResultChecker()
+				.checkDeviceName()
+				.checkPlatformName("IOS");
 	}
 
 	@Test
@@ -28,7 +34,11 @@ public class IosAllocationTests {
 				.setDeviceName()
 				.setPlatformVersion()
 				.createIOSDriver()
-				.test();
+				.test()
+				.createResultChecker()
+				.checkDeviceName()
+				.checkPlatformVersion()
+				.checkPlatformName("IOS");
 	}
 
 	@Test
@@ -36,7 +46,22 @@ public class IosAllocationTests {
 		new TestBuilder()
 				.setPlatformVersion()
 				.createIOSDriver()
-				.test();
+				.test()
+				.createResultChecker()
+				.checkPlatformVersion()
+				.checkPlatformName("IOS");
+	}
+
+	@Test
+	public void ByRegEx() {
+		String regEx = "iPhone.*";
+		new TestBuilder()
+				.setRegEx(regEx)
+				.createIOSDriver()
+				.test()
+				.createResultChecker()
+				.checkMatchesRegEx(regEx)
+				.checkPlatformName("IOS");
 	}
 
 	@Test
@@ -45,7 +70,10 @@ public class IosAllocationTests {
 		new TestBuilder()
 				.setPrivateDeviceOnly()
 				.createIOSDriver()
-				.test();
+				.test()
+				.createResultChecker()
+				.checkPrivateDeviceId()
+				.checkPlatformName("IOS");
 	}
 
 }
