@@ -11,16 +11,18 @@ import static org.junit.Assert.assertTrue;
 
 public class TestResultChecker extends EnvironmentVariables {
 
+	final String USER_ID;
 	private DeviceDescriptor.DeviceContainer device;
 
 	public TestResultChecker(AppiumDriver driver) {
 		int reportId = Integer.valueOf(driver.getCapabilities().getCapability("testobject_test_report_id").toString());
-		String userId = driver.getCapabilities().getCapability("testobject_user_id").toString();
+		USER_ID = driver.getCapabilities().getCapability("testobject_user_id").toString();
 		String projectId = driver.getCapabilities().getCapability("testobject_project_id").toString();
 
 		TestObjectClient client = TestObjectClient.Factory.create(getEnvOrFail(REST_API));
-		client.login(userId, PASSWORD);
-		device = client.getTestReport(userId, projectId, reportId).getDevice();
+		client.login(USER_ID, PASSWORD);
+		device = client.getTestReport(USER_ID, projectId, reportId).getDevice();
+		System.out.println(String.format("Allocated device is: %s - %s", device.id, device.name));
 	}
 
 	public TestResultChecker checkDeviceDescriptorId() {
@@ -53,8 +55,7 @@ public class TestResultChecker extends EnvironmentVariables {
 	}
 
 	public TestResultChecker checkPrivateDeviceId() {
-		assertEquals("Private device should be " + DEVICE_DESCRIPTOR_ID + " but found " + device.id, device.id,
-				PRIVATE_DEVICE_DESCRIPTOR_ID);
+		assertTrue(device.id + " is not a private device", new DeviceClient().login(USER_ID, PASSWORD).isPrivate(device.id));
 		return this;
 	}
 }

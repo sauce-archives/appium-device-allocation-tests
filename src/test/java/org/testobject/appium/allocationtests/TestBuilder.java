@@ -20,7 +20,8 @@ public class TestBuilder extends EnvironmentVariables {
 		capabilities.setCapability("testobject_uuid", UUID.randomUUID().toString());
 		capabilities.setCapability("testobject_api_key", getEnvOrFail(TESTOBJECT_API_KEY));
 		capabilities.setCapability("testobject_session_creation_retry", getEnvOrDefault(TESTOBJECT_SESSION_CREATION_RETRY, "1"));
-		capabilities.setCapability("testobject_session_creation_timeout",getEnvOrDefault(TESTOBJECT_SESSION_CREATION_TIMEOUT, "300000")); //5 minutes
+		capabilities.setCapability("testobject_session_creation_timeout",
+				getEnvOrDefault(TESTOBJECT_SESSION_CREATION_TIMEOUT, "300000")); //5 minutes
 	}
 
 	public TestBuilder setDeviceDescriptorId() {
@@ -64,7 +65,7 @@ public class TestBuilder extends EnvironmentVariables {
 	}
 
 	public TestBuilder createAndroidDriver() {
-		System.out.println(capabilities.toString());
+		System.out.println("\n" + capabilities.toString());
 		Instant startTime = Instant.now();
 		try {
 			driver = new AndroidDriver(new URL(getEnvOrFail(APPIUM_SERVER)), capabilities);
@@ -103,7 +104,7 @@ public class TestBuilder extends EnvironmentVariables {
 		}
 		Instant endTime = Instant.now();
 		System.out.println("Closing connection time: " + startTime.until(endTime, ChronoUnit.SECONDS) + "s");
-		System.out.println(driver.getCapabilities().getCapability("testobject_test_report_url") + "\n");
+		System.out.println(driver.getCapabilities().getCapability("testobject_test_report_url"));
 	}
 
 	public TestResultChecker createResultChecker() {
