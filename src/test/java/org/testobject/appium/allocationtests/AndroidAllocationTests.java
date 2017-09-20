@@ -1,6 +1,5 @@
 package org.testobject.appium.allocationtests;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -18,7 +17,7 @@ public class AndroidAllocationTests {
 				.checkPlatformName("ANDROID");
 	}
 
-	@Test @Ignore
+	@Test
 	public void ByDeviceName() {
 		new TestBuilder()
 				.setDeviceName()
@@ -29,7 +28,7 @@ public class AndroidAllocationTests {
 				.checkPlatformName("ANDROID");
 	}
 
-	@Test @Ignore
+	@Test
 	public void ByDeviceNameAndPlatformVersion() {
 		new TestBuilder()
 				.setDeviceName()
@@ -42,7 +41,7 @@ public class AndroidAllocationTests {
 				.checkPlatformName("ANDROID");
 	}
 
-	@Test @Ignore
+	@Test
 	public void ByPlatformVersion() {
 		new TestBuilder()
 				.setPlatformVersion()
@@ -53,7 +52,7 @@ public class AndroidAllocationTests {
 				.checkPlatformName("ANDROID");
 	}
 
-	@Test @Ignore
+	@Test
 	public void ByRegEx() {
 		String regEx = "LG.*";
 		new TestBuilder()
