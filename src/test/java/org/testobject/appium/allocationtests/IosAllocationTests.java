@@ -75,11 +75,9 @@ public class IosAllocationTests {
 		new TestBuilder()
 				.setPrivateDeviceOnly()
 				.setAutomationNameToXCUITest()
-				.setPlatformVersion()
 				.createIOSDriver()
 				.test()
 				.createResultChecker()
-				.checkPlatformVersion()
 				.checkPrivateDeviceId()
 				.checkPlatformName("IOS");
 	}
