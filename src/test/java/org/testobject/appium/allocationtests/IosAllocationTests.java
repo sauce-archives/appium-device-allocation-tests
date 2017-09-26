@@ -34,13 +34,11 @@ public class IosAllocationTests {
 	public void ByDeviceNameAndPlatformVersion() {
 		new TestBuilder()
 				.setDeviceName()
-				.setPlatformVersion()
 				.setAutomationNameToXCUITest()
 				.createIOSDriver()
 				.test()
 				.createResultChecker()
 				.checkDeviceName()
-				.checkPlatformVersion()
 				.checkPlatformName("IOS");
 	}
 
