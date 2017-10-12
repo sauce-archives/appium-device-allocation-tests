@@ -10,6 +10,7 @@ public class EnvironmentVariables {
 	public static final String TESTOBJECT_POOL_ID = System.getenv("TESTOBJECT_POOL_ID");
 	public static final String TESTOBJECT_SESSION_CREATION_TIMEOUT = System.getenv("TESTOBJECT_SESSION_CREATION_TIMEOUT");
 	public static final String TESTOBJECT_SESSION_CREATION_RETRY = System.getenv("TESTOBJECT_SESSION_CREATION_RETRY");
+	public static final String TESTOBJECT_APPIUM_VERSION = System.getenv("TESTOBJECT_APPIUM_VERSION");
 	public static final String PASSWORD = System.getenv("PASSWORD");
 	public static final String PRIVATE_DEVICE_DESCRIPTOR_ID = System.getenv("PRIVATE_DEVICE_DESCRIPTOR_ID");
 
