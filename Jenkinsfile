@@ -10,17 +10,9 @@ def runTest() {
                 try {
                     if (env.TESTS) {
                         sh "mvn -Dtest=${env.TESTS} -q clean test"
-                        if (currentBuild.result == null) {
-                            currentBuild.result = "SUCCESS" // sets the ordinal as 0 and boolean to true (influxDB)
-                        }
-                    }
-                } catch (ex) {
-                    if (currentBuild.result == null) {
-                        currentBuild.result = "FAILURE" // sets the ordinal as 4 and boolean to false (influxDB)
                     }
                 } finally {
                     junit "**/target/surefire-reports/*.xml"
-                    reportResultsToInfluxDb()
                 }
             }
         }
@@ -29,6 +21,7 @@ def runTest() {
 
 try {
     runTest()
+    reportResultsToInfluxDb()
     if (env.SUCCESS_NOTIFICATION_ENABLED) {
         slackSend channel: "#${env.SLACK_CHANNEL}", color: "good", message: "`${env.JOB_BASE_NAME}` passed (<${BUILD_URL}|open>)", teamDomain: "${env.SLACK_SUBDOMAIN}", token: "${env.SLACK_TOKEN}"
     }
@@ -41,17 +34,26 @@ try {
 
 def reportResultsToInfluxDb() {
     if (env.REPORT_RESULTS ?: true) {
-        def influxDb
-        if (env.INFLUX_DB) {
-            influxDb = env.INFLUX_DB
-        } else {
-            influxDb = isProduction() ? "production" : "staging"
+        node {
+            stage("Report to InfluxDb") {
+                def influxDb
+                if (env.INFLUX_DB) {
+                    influxDb = env.INFLUX_DB
+                } else {
+                    influxDb = isProduction() ? "production" : "staging"
+                }
+                def result = "0"
+                if (currentBuild.result == null) {
+                    result = "1"
+                    currentBuild.result = "SUCCESS"
+                }
+                step([$class       : 'InfluxDbPublisher',
+                      customData   : ['result': result],
+                      customDataMap: null,
+                      customPrefix : null,
+                      target       : influxDb])
+            }
         }
-        step([$class       : 'InfluxDbPublisher',
-              customData   : null,
-              customDataMap: null,
-              customPrefix : null,
-              target       : influxDb])
     }
 }
 
