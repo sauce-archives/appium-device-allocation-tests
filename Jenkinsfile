@@ -1,5 +1,18 @@
 #!groovy
 
+try {
+    runTest()
+    reportResultsToInfluxDb()
+    if (env.SUCCESS_NOTIFICATION_ENABLED) {
+        slackSend channel: "#${env.SLACK_CHANNEL}", color: "good", message: "`${env.JOB_BASE_NAME}` passed (<${BUILD_URL}|open>)", teamDomain: "${env.SLACK_SUBDOMAIN}", token: "${env.SLACK_TOKEN}"
+    }
+} catch (err) {
+    if (isProduction() || env.FAILURE_NOTIFICATION_ENABLED) {
+        slackSend channel: "#${env.SLACK_CHANNEL}", color: "bad", message: "`${env.JOB_BASE_NAME}` failed: $err (<${BUILD_URL}|open>)", teamDomain: "${env.SLACK_SUBDOMAIN}", token: "${env.SLACK_TOKEN}"
+    }
+    throw err
+}
+
 def runTest() {
     node {
         stage("checkout") {
@@ -19,32 +32,19 @@ def runTest() {
     }
 }
 
-try {
-    runTest()
-    reportResultsToInfluxDb()
-    if (env.SUCCESS_NOTIFICATION_ENABLED) {
-        slackSend channel: "#${env.SLACK_CHANNEL}", color: "good", message: "`${env.JOB_BASE_NAME}` passed (<${BUILD_URL}|open>)", teamDomain: "${env.SLACK_SUBDOMAIN}", token: "${env.SLACK_TOKEN}"
-    }
-} catch (err) {
-    if (isProduction() || env.FAILURE_NOTIFICATION_ENABLED) {
-        slackSend channel: "#${env.SLACK_CHANNEL}", color: "bad", message: "`${env.JOB_BASE_NAME}` failed: $err (<${BUILD_URL}|open>)", teamDomain: "${env.SLACK_SUBDOMAIN}", token: "${env.SLACK_TOKEN}"
-    }
-    throw err
-}
-
 def reportResultsToInfluxDb() {
     if (env.REPORT_RESULTS ?: true) {
         node {
-            stage("Report to InfluxDb") {
+            stage("report to influxDb") {
                 def influxDb
                 if (env.INFLUX_DB) {
                     influxDb = env.INFLUX_DB
                 } else {
                     influxDb = isProduction() ? "production" : "staging"
                 }
-                def result = "0"
+                def result = 0
                 if (currentBuild.result == null) {
-                    result = "1"
+                    result = 1
                     currentBuild.result = "SUCCESS"
                 }
                 step([$class       : 'InfluxDbPublisher',
