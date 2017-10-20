@@ -9,6 +9,9 @@ try {
     if (isProduction() || env.FAILURE_NOTIFICATION_ENABLED) {
         slackSend channel: "#${env.SLACK_CHANNEL}", color: "bad", message: "`${env.JOB_BASE_NAME}` failed: $err (<${BUILD_URL}|open>)", teamDomain: "${env.SLACK_SUBDOMAIN}", token: "${env.SLACK_TOKEN}"
     }
+	if (currentBuild.result == null || currentBuild.result == "UNSTABLE") {
+		currentBuild.result = "FAILURE"
+	}
     throw err
 } finally {
     reportResultsToInfluxDb()
