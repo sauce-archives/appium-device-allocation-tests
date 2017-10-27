@@ -37,26 +37,29 @@ def runTest() {
 }
 
 def reportResultsToInfluxDb() {
-    if (env.REPORT_RESULTS ?: true) {
+    if (env.REPORT_RESULTS) {
         node {
-            stage("report to influxDb") {
-                def influxDb
-                if (env.INFLUX_DB) {
-                    influxDb = env.INFLUX_DB
-                } else {
-                    influxDb = isProduction() ? "production" : "staging"
-                }
-                def result = 0
-                if (currentBuild.result == null) {
-                    result = 1
-                    currentBuild.result = "SUCCESS"
-                }
-                step([$class       : 'InfluxDbPublisher',
-                      customData   : ['result': result],
-                      customDataMap: null,
-                      customPrefix : null,
-                      target       : influxDb])
+            def influxDb
+            if (env.INFLUX_DB) {
+                influxDb = env.INFLUX_DB
+            } else {
+                influxDb = isProduction() ? "production" : "staging"
             }
+            def result = 0
+            if (currentBuild.result == null) {
+                currentBuild.result = "SUCCESS"
+                result = 1
+            }
+
+            def customData = ['result': result]
+            if (isProduction()) {
+                customData = env.PART_OF_SLA ? ['result': result, 'sla': true] : ['result': result, 'sla': false]
+            }
+            step([$class       : 'InfluxDbPublisher',
+                  customData   : customData,
+                  customDataMap: null,
+                  customPrefix : null,
+                  target       : influxDb])
         }
     }
 }
