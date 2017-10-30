@@ -52,7 +52,7 @@ def reportResultsToInfluxDb() {
             }
 
             def customData = ['result': result]
-            if (isProduction()) {
+            if (influxDb == "production") {
                 customData = env.PART_OF_SLA.is("true") ? ['result': result, 'sla': true] : ['result': result, 'sla': false]
             }
             step([$class       : 'InfluxDbPublisher',
@@ -65,5 +65,5 @@ def reportResultsToInfluxDb() {
 }
 
 def isProduction() {
-    return env.APPIUM_URL && env.APPIUM_URL.contains("testobject.com")
+    return env.APPIUM_SERVER && env.APPIUM_SERVER.contains("testobject.com")
 }
